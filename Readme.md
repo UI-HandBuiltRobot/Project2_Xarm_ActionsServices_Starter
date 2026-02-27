@@ -7,6 +7,9 @@ Students are responsible for implementing the action server logic and
 service-based task decomposition required to perform grid-based object
 retrieval using the HiWonder Xarm 1S.
 
+A **barebones action server scaffold** is now included in `xarm_nodes` as
+`retrieve_items_action_server.py`.
+
 ------------------------------------------------------------------------
 
 # Workspace Structure
@@ -14,9 +17,11 @@ retrieval using the HiWonder Xarm 1S.
     Project2_ws/
     │
     ├── xarm_nodes/
-    │   ├── pickup_gui.py
-    │   ├── x_arm_hardware_node.py
-    │   └── ...
+    │   ├── resource/
+    │   └── xarm_nodes/
+    │       ├── pickup_gui.py
+    │       ├── retrieve_items_action_server.py
+    │       └── x_arm_hardware_node.py
     │
     └── xarm_pickup_interfaces/
         ├── action/RetrieveItems.action
@@ -92,13 +97,29 @@ This node interfaces with the physical Xarm hardware and should contain all hard
 
 Students may modify or extend this node as needed.
 
+### retrieve_items_action_server.py
+
+This is a scaffolded ROS 2 action server for `RetrieveItems` (action name:
+`retrieve_items`). It includes:
+
+-   Node setup and action server creation
+-   Goal callback, cancel callback, and async execute callback stubs
+-   `MultiThreadedExecutor`-based main loop
+-   TODO markers where students implement service calls and retrieval logic
+
+You can run the action server by entering
+``` bash
+ros2 run xarm_nodes retrieve_items_action_server
+```
+into the terminal.
+
 ------------------------------------------------------------------------
 
 # What Students Must Implement
 
 Students must implement:
 
--   A ROS 2 **Action Server** using the `RetrieveItems` interface
+-   The logic inside the scaffolded ROS 2 **Action Server** (`retrieve_items_action_server.py`) using the `RetrieveItems` interface
 -   Service-based decomposition of tasks. These might include:
     -   Move to box
     -   Close gripper
